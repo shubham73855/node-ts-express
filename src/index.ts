@@ -1,20 +1,22 @@
-import express, { Request, Response } from "express";
+import express from "express";
 import dotenv from "dotenv";
+import connectDB from "./config/db";
+import userRoutes from "./routes/userRoutes";
 
 dotenv.config();
+connectDB();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 4000;
 
-// Middleware
 app.use(express.json());
 
-// Routes
-app.get("/", (req: Request, res: Response) => {
-  res.send("Hello, TypeScript + Express!");
-});
+app.get("/", (_, res) =>
+  res.send("Welcome to the Node + TypeScript + Express + MongoDB API!")
+);
 
-// Start server
+app.use("/api/users", userRoutes);
+
 app.listen(PORT, () => {
-  console.log(`🚀 Server running at http://localhost:${PORT}`);
+  console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
