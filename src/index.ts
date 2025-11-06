@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./config/db";
 import userRoutes from "./routes/userRoutes";
+import authRoutes from "./routes/authRoutes";
 import cors from "cors";
 
 dotenv.config();
@@ -17,6 +18,7 @@ app.get("/", (_, res) =>
   res.send("Welcome to the Node + TypeScript + Express + MongoDB API!")
 );
 
+app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 
 app.listen(PORT, () => {

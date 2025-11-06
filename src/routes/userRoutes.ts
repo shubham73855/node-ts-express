@@ -6,8 +6,11 @@ import {
   updateUser,
   deleteUser,
 } from "../controllers/userController";
+import { protect } from "../middleware/auth";
 
 const router = express.Router();
+
+router.use(protect);
 
 router.post("/", createUser);
 router.get("/", getUsers);
